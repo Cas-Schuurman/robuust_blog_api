@@ -19,3 +19,6 @@ Route::get('/', function () {
 });
 
 Route::get('/blogs', [BlogController::class, 'index']);
+
+Route::post('/blogs', [BlogController::class, 'update']);
+Route::delete('/blogs', [BlogController::class, 'delete']);

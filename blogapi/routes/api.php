@@ -39,5 +39,3 @@ Route::post('/authors', 'App\Http\Controllers\AuthorController@store');
 Route::get('/authors/{author}', 'App\Http\Controllers\AuthorController@show');
 Route::put('/authors/{author}', 'App\Http\Controllers\AuthorController@update');
 Route::delete('/authors/{author}', 'App\Http\Controllers\AuthorController@delete');
-
-//TODO: Give author own table with name and last name and link it to the blog table like one author can create one or more blogs but only one blog is from one author so many to one or one to many relation

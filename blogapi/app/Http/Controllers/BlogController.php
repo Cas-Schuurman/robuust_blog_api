@@ -36,12 +36,16 @@ class BlogController extends Controller
         ], 201);
     }
 
+    // Find blog id and update the blog
     public function update(Request $request, Blog $blog){
+        $blog = Blog::find($request->all()["blogid"]);
         $blog->update($request->all());
-    }
 
-    public function delete(Blog $blog){
-        $blog->delete();
+        return redirect("/blogs?page=" . $request->all()["page"]);
     }
-
+    // Find blog id and delete the blog
+    public static function delete(Blog $blog, Request $request){
+        Blog::find($request->all()["blogid"])->delete();
+        return redirect("/blogs?page=" . $request->all()["page"]);
+    }
 }

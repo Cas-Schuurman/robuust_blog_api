@@ -13,6 +13,6 @@ class Blog extends Model
     protected $fillable = ['title', 'body', 'author_ID'];
 
     public function author(){
-        return $this->belongsTo(Author::class, 'author_ID');
+        return $this->belongsTo(Author::class, "author_ID", "author_ID");
     }
 }

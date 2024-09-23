@@ -12,6 +12,6 @@ class Author extends Model
     protected $fillable = ['firstname', 'lastname'];
 
     public function blogposts(){
-        return $this->hasMany(Blog::class, "author_ID");
+        return $this->hasMany(Blog::class, "author_ID", "author_ID");
     }
 }
