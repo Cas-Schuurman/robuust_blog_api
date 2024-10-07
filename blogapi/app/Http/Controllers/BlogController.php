@@ -68,8 +68,14 @@ class BlogController extends Controller
         return redirect("/blogs");
     }
 
-    public function BlogCount(){
-        $year = date("Y");
+    public static function BlogCount(bool $test = false) {
+
+        //engels A bit crooked, but I don’t know the solution otherwise without breaking the function
+        if($test){
+            $year = 0;
+        }else{
+            $year = date("Y");
+        }
         $blogcounts = Blog::select(Blog::raw('COUNT(*) as blogspermonth, MONTH(created_at) as month'))
         ->whereYear('created_at', $year)
         ->groupby('month')
@@ -91,9 +97,10 @@ class BlogController extends Controller
             }
         }
 
-        $object = json_encode($newBlogCounts);
-        //return is an object otherwhise the return view gives error
-        return $object;
+        $jsonnewBlogCount = json_encode($newBlogCounts);
+        //return is an json otherwhise the return view gives error
+        return $jsonnewBlogCount
+;
     }
 
 }
