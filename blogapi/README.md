@@ -7,7 +7,8 @@ This is an api specific for creating and editing blogs
 
 1. Clone repository
 2. Run composer Install
-3. Run the application with php artisian serve
+3. Run the migrations
+4. Run the application with php artisian serve
 
 ## License
 
