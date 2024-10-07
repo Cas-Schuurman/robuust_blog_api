@@ -2,6 +2,8 @@
 namespace App\Http\Controllers;
 use App\Models\Author;
 use App\Models\Blog;
+use Error;
+use Exception;
 use Illuminate\Http\Request;
 
 class BlogController extends Controller
@@ -34,17 +36,36 @@ class BlogController extends Controller
     }
 
     // Find blog id and update the blog
-    public function update(Request $request, Blog $blog){
-        $blog = Blog::find($request->all()["blogid"]);
-        $blog->update($request->all());
+    public function update(Request $request, $blogid = null){
+        if($blogid == null){
+            $blogid = $request->all()["blogid"];
+        }
 
-        return redirect("/blogs?page=" . $request->all()["page"]);
+        try {
+            $blog= Blog::find($blogid);
+            $blog->update($request->all());
+        } catch (Error $e) {
+            return response()->json([
+                'message' => "cannot update blog because blog is not in database"
+            ]);
+        }  
+        return redirect("/blogs");
     }
     
     // Find blog id and delete the blog
-    public static function delete(Blog $blog, Request $request){
-        Blog::find($request->all()["blogid"])->delete();
-        return redirect("/blogs?page=" . $request->all()["page"]);
+    //overload this function
+    public static function delete(Request $request, $blogid = null){
+        if($blogid == null){
+            $blogid = $request->all()["blogid"];
+        }
+            try {
+                Blog::find($blogid)->delete();
+            } catch (Error $e) {
+                return response()->json([
+                    'message' => "cannot delete blog because blog is not in database"
+                ]);
+            }       
+        return redirect("/blogs");
     }
 
     public function BlogCount(){

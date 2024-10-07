@@ -1,3 +1,8 @@
+<?php 
+use App\Http\Controllers\BlogController;
+//I want this form to send the blog id to the controller after i clicked the button instead of response
+
+?>
 <div class="modal fade" id="ModalDelete{{ $blog->id }}" tabindex="-1" aria-labelledby="ModalDelete{{ $blog->id }}" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">

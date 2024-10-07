@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Author;
+use Error;
 use Illuminate\Http\Request;
 
 class AuthorController extends Controller
@@ -31,8 +32,16 @@ class AuthorController extends Controller
         }
     
         //Delete author but because it is cascade all the blogs will be removed from this author
-        public function delete(Author $author){
-            $author->delete();
+        public function delete($authorid){
+            
+
+            try {
+                Author::find($authorid)->delete();
+            } catch (Error $e) {
+                return response()->json([
+                    'message' => "cannot delete author because author is not in database"
+                ]);
+            }       
         }
     
 }
