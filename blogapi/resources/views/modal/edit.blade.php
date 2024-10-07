@@ -1,3 +1,4 @@
+{{-- Modal for editing a blog --}}
 <div class="modal fade" id="ModalEdit{{ $blog->id }}" tabindex="-1" aria-labelledby="ModalEditLabel{{ $blog->id }}" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
