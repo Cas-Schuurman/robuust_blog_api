@@ -1,5 +1,3 @@
-<!-- can you create a readme for this project -->
-
 ## Robuust_Api
 
 This is an api specific for creating and editing blogs
