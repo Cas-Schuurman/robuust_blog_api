@@ -16,7 +16,7 @@
                     </div>
                     <div>
                         <label for="body">Body</label>
-                        <input type="text" class="form-control" id="body" name="body" value="{{ $blog->body }}">
+                        <textarea type="text" class="form-control blogtext" id="body" name="body">{{ $blog->body }}</textarea>
                     </div>
                     <div>
                         <button type="button" class="btn btn-secondary float-end mt-1 ms-1" data-bs-dismiss="modal">Close</button>

@@ -13,7 +13,7 @@
                 </div>
                 <div>
                     <label for="body">Body</label>
-                    <input type="text" class="form-control" id="body" name="body" value="{{ $blog->body }}" readonly>
+                    <textarea type="text" class="form-control blogtext" id="body" name="body" readonly>{{$blog->body}}</textarea>
                 </div>
                 <div>
                     <label for="author">Author</label>
