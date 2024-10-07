@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Author extends Model
 {
+    //Make it possbile to fill firstname and lastname with own data
     use HasFactory;
     protected $table = 'author';
     protected $fillable = ['firstname', 'lastname'];

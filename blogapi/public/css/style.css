@@ -7,10 +7,21 @@
 }
 
 .blogbody{
-    max-width: 70vh;
+    width: 40%;
+    max-width: 60vh;
 }
 
 #delete_blog{
     border: none;
     background: transparent;
+}
+
+.canvas {
+    width: 100% !important; 
+    height: auto !important; 
+}
+
+.chartcontainer{
+    width: 100%;
+    height: 80%;
 }

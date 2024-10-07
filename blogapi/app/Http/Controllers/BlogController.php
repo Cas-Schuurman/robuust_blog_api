@@ -1,18 +1,15 @@
 <?php
-
 namespace App\Http\Controllers;
-
 use App\Models\Author;
 use App\Models\Blog;
-use Exception;
 use Illuminate\Http\Request;
-use PhpParser\Node\Stmt\TryCatch;
 
 class BlogController extends Controller
 {
     public function index(){
-        $blogs = Blog::with('author')->paginate(5);
-        return View('blogs.index', compact('blogs'));
+        $blogs = Blog::with('author')->paginate(10);
+        $blogcount = self::BlogCount();
+        return View('blogs.index', compact('blogs'), compact('blogcount'));
     }
 
     public function show(Blog $blog){
@@ -43,9 +40,39 @@ class BlogController extends Controller
 
         return redirect("/blogs?page=" . $request->all()["page"]);
     }
+    
     // Find blog id and delete the blog
     public static function delete(Blog $blog, Request $request){
         Blog::find($request->all()["blogid"])->delete();
         return redirect("/blogs?page=" . $request->all()["page"]);
     }
+
+    public function BlogCount(){
+        $year = date("Y");
+        $blogcounts = Blog::select(Blog::raw('COUNT(*) as blogspermonth, MONTH(created_at) as month'))
+        ->whereYear('created_at', $year)
+        ->groupby('month')
+        ->get();
+        //create new object
+        $newBlogCounts = [];
+
+        for ($i = 1; $i < 13; $i++) { // Loop through months 1 to 12 (12 months)
+            // Initialize the new object
+            $newBlogCounts[$i] = (object) ['blogspermonth' => 0, 'month' => $i];
+        
+            // Check if the month exists in the original blogcounts
+            foreach ($blogcounts as $count) {
+                if ($count->month == $i) {
+                    // If the month exists, use its blogspermonth value
+                    $newBlogCounts[$i]->blogspermonth = $count->blogspermonth;
+                    break;
+                }
+            }
+        }
+
+        $object = json_encode($newBlogCounts);
+        //return is an object otherwhise the return view gives error
+        return $object;
+    }
+
 }
